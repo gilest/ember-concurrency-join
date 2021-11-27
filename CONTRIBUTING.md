@@ -3,7 +3,7 @@
 ## Installation
 
 * `git clone <repository-url>`
-* `cd ember-concurrency-cacheable`
+* `cd ember-concurrency-join`
 * `yarn install`
 
 ## Linting

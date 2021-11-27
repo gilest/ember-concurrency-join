@@ -1,4 +1,4 @@
-ember-concurrency-cacheable
+ember-concurrency-join
 ==============================================================================
 
 [Short description of the addon.]
@@ -16,7 +16,7 @@ Installation
 ------------------------------------------------------------------------------
 
 ```
-ember install ember-concurrency-cacheable
+ember install ember-concurrency-join
 ```
 
 
