@@ -15,7 +15,7 @@ module('Unit | Task Modifier | join', function (hooks) {
     }
   }
 
-  test('enforces maxConcurrency of 1, queues runs and joins result', async function (assert) {
+  test('queues all but one run and joins result', async function (assert) {
     assert.expect(5);
     const instance = new TestClass();
 
@@ -41,23 +41,6 @@ module('Unit | Task Modifier | join', function (hooks) {
       thirdResult,
       'final result is also the same'
     );
-  });
-
-  test('errors with maxConcurrency set', function (assert) {
-    assert.expect(1);
-
-    class TestClass {
-      @task({ join: true, maxConcurrency: 1 })
-      *generate() {}
-    }
-
-    const instance = new TestClass();
-    instance.generate.perform().catch((e) => {
-      assert.ok(
-        e.message.includes(`Cannot use 'maxConcurrency'`),
-        'warns about combining maxConcurrency with joinabel'
-      );
-    });
   });
 
   test('re-runs after cancelAll is called with resetState', async function (assert) {
@@ -110,5 +93,28 @@ module('Unit | Task Modifier | join', function (hooks) {
       secondResult,
       'cache is busted by performAgain'
     );
+  });
+
+  // Buffer policies
+  // drop - cannot set multiple buffer policies
+  // keepLatest - cannot set multiple buffer policies
+  // enqueue - used by join
+  // maxConcurrency - specifically throws an error
+
+  test('errors with maxConcurrency set', function (assert) {
+    assert.expect(1);
+
+    class TestClass {
+      @task({ join: true, maxConcurrency: 2 })
+      *generate() {}
+    }
+
+    const instance = new TestClass();
+    instance.generate.perform().catch((e) => {
+      assert.ok(
+        e.message.includes(`Cannot use 'maxConcurrency'`),
+        'warns about combining maxConcurrency with joinabel'
+      );
+    });
   });
 });
