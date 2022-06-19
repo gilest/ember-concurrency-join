@@ -1,11 +1,11 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import { task, timeout } from 'ember-concurrency';
-import { defineModifier } from 'ember-concurrency-join';
+import { registerJoinModifier } from 'ember-concurrency-join';
 
 module('Unit | Task Modifier | join', function (hooks) {
   setupTest(hooks);
-  defineModifier();
+  registerJoinModifier();
 
   class TestClass {
     @task({ join: true })
