@@ -2,7 +2,7 @@ import { waitForProperty } from 'ember-concurrency';
 
 const join = (taskFactory, enabled) => {
   if (enabled) {
-    let taskDefinition = taskFactory.taskDefinition;
+    const taskDefinition = taskFactory.taskDefinition;
 
     // Configure task to be queued
     const enqueueModifier = taskFactory.getModifier('enqueue');
@@ -11,7 +11,7 @@ const join = (taskFactory, enabled) => {
     // With a maxConcurrency of 1
     taskFactory.setMaxConcurrency(1);
 
-    let joinDefintion = function* (...args) {
+    const joinDefintion = function* (...args) {
       const task = this[taskFactory.name];
 
       if (task.modifierOptions.maxConcurrency) {
