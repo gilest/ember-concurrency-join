@@ -1,7 +1,7 @@
 {
   "name": "ember-concurrency-join",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Adds a 'join' modifier for use with ember-concurrency tasks.",
   "keywords": [
     "ember-addon",
     "ember-concurrency"
